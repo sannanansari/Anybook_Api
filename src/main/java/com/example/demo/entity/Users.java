@@ -15,7 +15,8 @@ public class Users {
 	private String email;
 	private long number;
 	private String gender;
-	private String Password;
+	private String password;
+	
 	private String role = "user";
 //	private String ConfirmPassword;
 	
@@ -26,7 +27,7 @@ public class Users {
 		this.email = email;
 		this.number = number;
 		this.gender = gender;
-		Password = password;
+		this.password = password;
 		this.role = role;
 	}
 	public String getRole() {
@@ -66,10 +67,10 @@ public class Users {
 		this.gender = gender;
 	}
 	public String getPassword() {
-		return Password;
+		return this.password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 //	public String getConfirmPassword() {
 //		return ConfirmPassword;
@@ -82,7 +83,7 @@ public class Users {
 	@Override
 	public String toString() {
 		return "Users [Id=" + Id + ", name=" + name + ", email=" + email + ", number=" + number + ", gender=" + gender
-				+ ", Password=" + Password + ", role=" + role + "]";
+				+ ", Password=" + this.password + ", role=" + role + "]";
 	}
 	
 

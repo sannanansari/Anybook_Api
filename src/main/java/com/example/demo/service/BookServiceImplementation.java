@@ -2,11 +2,13 @@ package com.example.demo.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Books;
+import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.repository.BookRepository;
 
 @Service
@@ -28,9 +30,14 @@ public class BookServiceImplementation implements BookService {
 	}
 
 	@Override
-	public Books getBookById(int id) {
-		System.out.println(bookRepo.findById(id).get());
-		return bookRepo.findById(id).get();
+	public Books getBookById(int id) throws BookNotFoundException {
+//		System.out.println(bookRepo.findById(id).get());
+		Optional<Books> book = bookRepo.findById(id);
+		if (book.isPresent()) { 
+			return book.get();
+		}
+		throw new BookNotFoundException("Book not Found "+id);
+//		return bookRepo.findById(id).get();
 	}
 
 	@Override
