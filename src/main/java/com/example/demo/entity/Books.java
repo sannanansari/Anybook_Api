@@ -4,15 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import lombok.Builder;
 
 @Entity
+//@Builder
 public class Books {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "books_generator")
 	private int id;
+	@NotNull(message = "Author Name cnnot be empty.")
 	private String author;
 	private String country;
+	@NotNull(message = "Image link connot be null")
 	private String image_link;
 	private String link;
 	private int pages;

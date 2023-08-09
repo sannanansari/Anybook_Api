@@ -2,7 +2,10 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Books;
+import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.BookService;
 
@@ -33,8 +37,8 @@ public class BookController {
 	
 	@GetMapping(value="/getBook/{id}")
 	@CrossOrigin(origins= "*")
-	public Books getBookbyId(@PathVariable("id") int id) {
-		return bookService.getBookById(id); 
+	public ResponseEntity<Books> getBookbyId(@PathVariable("id") int id) throws BookNotFoundException {
+		return ResponseEntity.ok(bookService.getBookById(id)); 
 	}
 	
 	@GetMapping(value="/getBookByTitle/{title}")
@@ -51,7 +55,7 @@ public class BookController {
 	
 	@PostMapping(value="/postBook")
 	@CrossOrigin(origins = "*")
-	public Books postBook(@RequestBody Books books) {
+	public Books postBook(@Valid @RequestBody Books books) {
 		return bookService.postBook(books);
 	}
 	
